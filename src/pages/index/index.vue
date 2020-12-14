@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-container>
-      <el-aside width="200px">
+      <el-aside width="170px">
         <el-menu
           disabled
           router
@@ -35,7 +35,7 @@
               <el-menu-item index="/index/classify">商品分类</el-menu-item>
               <el-menu-item index="/index/spec">商品规则</el-menu-item>
               <el-menu-item index="/index/goods">商品管理</el-menu-item>
-              <el-menu-item index="/index/vip">全员管理</el-menu-item>
+              <el-menu-item index="/index/vip">会员管理</el-menu-item>
               <el-menu-item index="/index/banner">轮播图管理</el-menu-item>
               <el-menu-item index="/index/seckill">秒杀活动</el-menu-item>
             </el-menu-item-group>
@@ -43,7 +43,12 @@
         </el-menu>
       </el-aside>
       <el-container>
-        <el-header>Header</el-header>
+        <el-header>
+          <div class="fr">
+            <div class='fl esc'>{{ list.username }}</div>
+            <div class='fl'><el-button type='danger' @click="quit">退出</el-button></div>
+          </div>
+        </el-header>
         <el-main>
           <!-- 面包屑导航 -->
           <el-breadcrumb separator-class="el-icon-arrow-right">
@@ -59,9 +64,25 @@
   </div>
 </template>
 <script>
+import { mapActions, mapGetters } from "vuex";
 export default {
+  computed: {
+    ...mapGetters({
+      list: 'user/list'
+    }),
+  },
+  methods:{
+    ...mapActions({
+      requestuserList: "user/requestuserList",
+    }),
+    quit(){
+      this.requestuserList({});
+      this.$router.push("/login")
+    }
+  },
   mounted() {
-    
+    // this.requestuserList()
+    // this.requestuserList({})
   },
 };
 </script>
@@ -89,5 +110,14 @@ export default {
 }
 .mgt {
   margin-top: 20px;
+}
+.fr {
+  float: right;
+}
+.fl {
+  float: left;
+}
+.esc{
+  margin-right: 20px;
 }
 </style>

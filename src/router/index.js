@@ -88,7 +88,11 @@ export default new Router({
     },
     {
       path: '/',
-      component: index,
+      component: login,
+    },
+    {
+      path: '*',
+      redirect: login
     }
   ]
 })

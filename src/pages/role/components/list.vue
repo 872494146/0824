@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="box">
     <el-table
       :data="list"
       style="width: 100%; margin-bottom: 20px"
@@ -62,3 +62,8 @@ export default {
   }
 };
 </script>
+<style scoped>
+.box{
+  margin-top: 20px;
+}
+</style>
